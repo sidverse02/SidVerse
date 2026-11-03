@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SidVerse — An Archival Estate & Digital Sanctuary</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Classic & Editorial Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            display: ['"Cinzel"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            linen: '#F6F3EE',
+            parchment: '#ECE6DC',
+            sandCard: '#FDFCFA',
+            espresso: '#141210',
+            deepWalnut: '#1C1917',
+            charcoal: '#292524',
+            bronze: '#B89255',
+            warmBronze: '#C8A97E',
+            mutedGold: '#9A7B40',
+            fadedText: '#78716C',
+            warmStone: '#44403C'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Warm tactile background texture */
+    body {
+      background-color: #141210;
+      color: #E7E5E4;
+      background-image: radial-gradient(rgba(200, 169, 126, 0.04) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    /* Soft warm ambient lighting */
+    .ambient-glow {
+      background: radial-gradient(circle at 50% 10%, rgba(200, 169, 126, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* Classic paper-like subtle borders & card style */
+    .archival-card {
+      background: linear-gradient(180deg, rgba(28, 25, 23, 0.85) 0%, rgba(22, 20, 18, 0.95) 100%);
+      border: 1px solid rgba(200, 169, 126, 0.15);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .archival-card:hover {
+      border-color: rgba(200, 169, 126, 0.38);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.5), 0 0 15px rgba(200, 169, 126, 0.04);
+    }
+
+    /* Custom subtle scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #141210;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2D2723;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B89255;
+    }
+
+    .editorial-dropcap::first-letter {
+      float: left;
+      font-family: 'Cinzel', serif;
+      font-size: 3.5rem;
+      line-height: 0.8;
+      padding-top: 4px;
+      padding-right: 12px;
+      padding-bottom: 2px;
+      color: #C8A97E;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col justify-between selection:bg-warmBronze selection:text-espresso antialiased relative">
+
+  <!-- Ambient Warm Lighting -->
+  <div class="fixed inset-0 ambient-glow z-0"></div>
+
+  <!-- Refined Editorial Header -->
+  <header class="w-full sticky top-0 z-40 backdrop-blur-md bg-espresso/80 border-b border-warmBronze/15 transition duration-300">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      
+      <!-- Monogram & Title -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-9 h-9 rounded-full border border-warmBronze/40 flex items-center justify-center font-display text-warmBronze text-sm font-semibold group-hover:border-warmBronze group-hover:bg-warmBronze/10 transition">
+          SV
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display tracking-[0.25em] text-sm text-stone-200 uppercase group-hover:text-warmBronze transition">SidVerse</span>
+          <span class="text-[9px] font-sans tracking-widest text-stone-500 uppercase">Archive & Atelier</span>
+        </div>
+      </a>
+
+      <!-- Desktop Section Links -->
+      <nav class="hidden md:flex items-center gap-7 font-sans text-xs tracking-wider text-stone-400">
+        <a href="#prologue" class="hover:text-warmBronze transition">THE SANCTUARY</a>
+        <a href="#gateways" class="hover:text-warmBronze transition">THE CHANNELS</a>
+        <a href="#about-space" class="hover:text-warmBronze transition">THE SPACE</a>
+        <a href="#guestbook" class="hover:text-warmBronze transition">VISITOR NOTES</a>
+      </nav>
+
+      <!-- Minimal Utility Deck -->
+      <div class="flex items-center gap-3">
+        <button id="copyAllBtn" class="text-xs font-sans tracking-wider px-3.5 py-1.5 rounded-full border border-warmBronze/30 hover:border-warmBronze text-warmBronze hover:bg-warmBronze/10 transition flex items-center gap-2">
+          <i class="fa-regular fa-paper-plane text-[10px]"></i>
+          <span class="hidden sm:inline">SHARE VAULT</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Body Content -->
+  <main class="w-full max-w-4xl mx-auto px-6 py-12 md:py-20 z-10 space-y-24">
+
+    <!-- HERO / PROLOGUE -->
+  <section id="prologue" class="text-center pt-4 md:pt-8 flex flex-col items-center">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-warmBronze/25 bg-deepWalnut/50 text-[11px] font-sans text-warmBronze tracking-widest uppercase mb-6">
+      <span class="w-1.5 h-1.5 rounded-full bg-warmBronze inline-block"></span>
+      The Digital Sanctuary
+    </div>
+
+    <h1 class="font-serif text-4xl sm:text-6xl text-stone-100 font-normal leading-tight tracking-tight max-w-2xl">
+      SidVerse.
+    </h1>
+
+    <div class="mt-3 flex items-center justify-center gap-2 text-xs font-serif tracking-widest text-warmBronze uppercase">
+      <span>Founded & Curated by Sidharth</span>
+    </div>
+
+    <p class="font-sans text-stone-400 text-sm sm:text-base max-w-xl mt-5 leading-relaxed font-normal">
+      The central home founded by <strong class="text-stone-200 font-medium">Sidharth</strong>. <span class="text-warmBronze font-serif italic">SidVerse</span> connects all of my creative directions, community hubs, and digital initiatives—including <strong class="text-stone-200 font-medium">PocketVerse</strong>, software experiments, and community spaces.
+    </p>
+
+    <!-- Decorative Divider -->
+    <div class="flex items-center gap-3 mt-10 text-warmBronze/40">
+      <div class="w-12 h-[1px] bg-warmBronze/30"></div>
+      <i class="fa-solid fa-feather-pointed text-xs text-warmBronze"></i>
+      <div class="w-12 h-[1px] bg-warmBronze/30"></div>
+    </div>
+  </section>
+
+  <!-- SECTION 1: THE FOUR PRIMARY GATEWAYS -->
+  <section id="gateways" class="space-y-6">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-warmBronze/20 pb-4 gap-2">
+      <div>
+        <span class="text-[10px] font-sans tracking-[0.25em] text-warmBronze uppercase">Branches of SidVerse</span>
+        <h2 class="font-serif text-2xl sm:text-3xl text-stone-100 font-normal mt-1">Official Initiatives & Channels</h2>
+      </div>
+      <p class="text-xs text-stone-500 font-sans max-w-xs sm:text-right">
+        Sub-entities and wings created and named by Sidharth under the SidVerse umbrella.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
+
+      <!-- 1. YouTube: PocketVerse -->
+      <article class="archival-card p-6 rounded-2xl flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between text-stone-400 mb-4">
+            <span class="text-[10px] font-sans tracking-widest text-warmBronze uppercase bg-deepWalnut/70 px-2.5 py-1 rounded-md border border-warmBronze/20">
+              Video & Media Wing
+            </span>
+            <button class="copy-trigger text-stone-500 hover:text-warmBronze transition p-1" data-url="https://youtube.com/@pocketverse_org?si=lW9g4Xnh_1h_9ico" title="Copy YouTube Link">
+              <i class="fa-regular fa-copy text-sm"></i>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-3.5 mb-3">
+            <div class="w-10 h-10 rounded-full bg-stone-900 border border-warmBronze/25 flex items-center justify-center text-warmBronze text-base">
+              <i class="fa-brands fa-youtube"></i>
+            </div>
+            <div>
+              <div class="text-[10px] font-mono tracking-wider text-warmBronze/80 uppercase">Branch of SidVerse</div>
+              <h3 class="font-serif text-xl text-stone-100 group-hover:text-warmBronze transition">PocketVerse</h3>
+              <p class="text-xs font-mono text-stone-400">@pocketverse_org</p>
+            </div>
+          </div>
+
+          <p class="font-sans text-xs sm:text-sm text-stone-400 leading-relaxed mt-3">
+            The video publication and visual production wing conceived under the SidVerse mantle. Here, long-form and short-form projects come to life.
+          </p>
+        </div>
+
+        <div class="pt-6 mt-4 border-t border-stone-800/80 flex items-center justify-between">
+          <span class="text-[11px] font-sans text-stone-500">Official Channel</span>
+          <a href="https://youtube.com/@pocketverse_org?si=lW9g4Xnh_1h_9ico" target="_blank" rel="noopener noreferrer" class="text-xs font-sans tracking-wide text-warmBronze hover:underline flex items-center gap-1.5">
+            <span>Visit PocketVerse</span>
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+      </article>
+
+      <!-- 2. Discord: Community -->
+      <article class="archival-card p-6 rounded-2xl flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between text-stone-400 mb-4">
+            <span class="text-[10px] font-sans tracking-widest text-warmBronze uppercase bg-deepWalnut/70 px-2.5 py-1 rounded-md border border-warmBronze/20">
+              Community Wing
+            </span>
+            <button class="copy-trigger text-stone-500 hover:text-warmBronze transition p-1" data-url="https://discord.gg/4CzDbhkCg" title="Copy Discord Invite">
+              <i class="fa-regular fa-copy text-sm"></i>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-3.5 mb-3">
+            <div class="w-10 h-10 rounded-full bg-stone-900 border border-warmBronze/25 flex items-center justify-center text-warmBronze text-base">
+              <i class="fa-brands fa-discord"></i>
+            </div>
+            <div>
+              <div class="text-[10px] font-mono tracking-wider text-warmBronze/80 uppercase">Branch of SidVerse</div>
+              <h3 class="font-serif text-xl text-stone-100 group-hover:text-warmBronze transition">The Collective Server</h3>
+              <p class="text-xs font-mono text-stone-400">discord.gg/4CzDbhkCg</p>
+            </div>
+          </div>
+
+          <p class="font-sans text-xs sm:text-sm text-stone-400 leading-relaxed mt-3">
+            The private gathering place and official community hub for SidVerse and PocketVerse followers to talk, collaborate, and exchange ideas.
+          </p>
+        </div>
+
+        <div class="pt-6 mt-4 border-t border-stone-800/80 flex items-center justify-between">
+          <span class="text-[11px] font-sans text-stone-500">Community Server</span>
+          <a href="https://discord.gg/4CzDbhkCg" target="_blank" rel="noopener noreferrer" class="text-xs font-sans tracking-wide text-warmBronze hover:underline flex items-center gap-1.5">
+            <span>Join Sanctuary</span>
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+      </article>
+
+      <!-- 3. GitHub: Code Repository -->
+      <article class="archival-card p-6 rounded-2xl flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between text-stone-400 mb-4">
+            <span class="text-[10px] font-sans tracking-widest text-warmBronze uppercase bg-deepWalnut/70 px-2.5 py-1 rounded-md border border-warmBronze/20">
+              Developer & Code Wing
+            </span>
+            <button class="copy-trigger text-stone-500 hover:text-warmBronze transition p-1" data-url="https://github.com/sidverse02" title="Copy GitHub URL">
+              <i class="fa-regular fa-copy text-sm"></i>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-3.5 mb-3">
+            <div class="w-10 h-10 rounded-full bg-stone-900 border border-warmBronze/25 flex items-center justify-center text-warmBronze text-base">
+              <i class="fa-brands fa-github"></i>
+            </div>
+            <div>
+              <div class="text-[10px] font-mono tracking-wider text-warmBronze/80 uppercase">Root Origin</div>
+              <h3 class="font-serif text-xl text-stone-100 group-hover:text-warmBronze transition">Sidharth's Code Node</h3>
+              <p class="text-xs font-mono text-stone-400">github.com/sidverse02</p>
+            </div>
+          </div>
+
+          <p class="font-sans text-xs sm:text-sm text-stone-400 leading-relaxed mt-3">
+            The code repository and engineering workshop where software builds, tools, and technical experiments originated by Sidharth are maintained.
+          </p>
+        </div>
+
+        <div class="pt-6 mt-4 border-t border-stone-800/80 flex items-center justify-between">
+          <span class="text-[11px] font-sans text-stone-500">Source Profile</span>
+          <a href="https://github.com/sidverse02" target="_blank" rel="noopener noreferrer" class="text-xs font-sans tracking-wide text-warmBronze hover:underline flex items-center gap-1.5">
+            <span>Open Repositories</span>
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+      </article>
+
+      <!-- 4. Instagram: Visual Journal -->
+      <article class="archival-card p-6 rounded-2xl flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between text-stone-400 mb-4">
+            <span class="text-[10px] font-sans tracking-widest text-warmBronze uppercase bg-deepWalnut/70 px-2.5 py-1 rounded-md border border-warmBronze/20">
+              Visual Chronicles Wing
+            </span>
+            <button class="copy-trigger text-stone-500 hover:text-warmBronze transition p-1" data-url="https://www.instagram.com/pocketverse_org?utm_source=ig_web_button_share_sheet&srtk=ZDNlZDc0MzIxNw==" title="Copy Instagram Link">
+              <i class="fa-regular fa-copy text-sm"></i>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-3.5 mb-3">
+            <div class="w-10 h-10 rounded-full bg-stone-900 border border-warmBronze/25 flex items-center justify-center text-warmBronze text-base">
+              <i class="fa-brands fa-instagram"></i>
+            </div>
+            <div>
+              <div class="text-[10px] font-mono tracking-wider text-warmBronze/80 uppercase">Branch of SidVerse</div>
+              <h3 class="font-serif text-xl text-stone-100 group-hover:text-warmBronze transition">PocketVerse Visuals</h3>
+              <p class="text-xs font-mono text-stone-400">@pocketverse_org</p>
+            </div>
+          </div>
+
+          <p class="font-sans text-xs sm:text-sm text-stone-400 leading-relaxed mt-3">
+            The visual journal and photographic channel of PocketVerse, documenting stories, previews, and community highlights under SidVerse.
+          </p>
+        </div>
+
+        <div class="pt-6 mt-4 border-t border-stone-800/80 flex items-center justify-between">
+          <span class="text-[11px] font-sans text-stone-500">Instagram Feed</span>
+          <a href="https://www.instagram.com/pocketverse_org?utm_source=ig_web_button_share_sheet&srtk=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="text-xs font-sans tracking-wide text-warmBronze hover:underline flex items-center gap-1.5">
+            <span>View Feed</span>
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- SECTION 2: ABOUT THE SPACE & POCKETVERSE -->
+  <section id="about-space" class="space-y-6">
+    <div class="border-b border-warmBronze/20 pb-4">
+      <span class="text-[10px] font-sans tracking-[0.25em] text-warmBronze uppercase">Hierarchy & Context</span>
+      <h2 class="font-serif text-2xl sm:text-3xl text-stone-100 font-normal mt-1">The Architecture of SidVerse</h2>
+    </div>
+
+    <div class="archival-card p-8 sm:p-10 rounded-3xl space-y-6 text-stone-300 font-sans text-sm sm:text-base leading-relaxed">
+      <p class="editorial-dropcap text-stone-300">
+        SidVerse is the sovereign parent identity established by Sidharth. Rather than treating each creative channel as an isolated island, SidVerse serves as the root tree from which all named initiatives, sub-brands, and community realms stem.
+      </p>
+
+      <p class="text-stone-400">
+        Initiatives like <span class="text-warmBronze font-serif italic text-base">PocketVerse</span> (across YouTube and Instagram), the Discord community, and developer repositories on GitHub are distinct branches created and curated by Sidharth. Each carries its own tailored focus while sharing the same foundation and vision.
+      </p>
+
+      <div class="my-6 p-6 rounded-2xl bg-stone-900/60 border-l-2 border-warmBronze italic font-serif text-base sm:text-lg text-stone-200">
+        "SidVerse is the trunk of the tree; PocketVerse and the sister nodes are the branches that reach outward."
+      </div>
+
+      <p class="text-stone-400">
+        Wherever you are arriving from—whether it is an upload on PocketVerse, a conversation on Discord, or an open repository on GitHub—you are standing inside the broader SidVerse network.
+      </p>
+    </div>
+  </section>
+
+    <!-- SECTION 1: THE FOUR PRIMARY GATEWAYS -->
+    <section id="gateways" class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-warmBronze/20 pb-4 gap-2">
+        <div>
+          <span class="text-[10px] font-sans tracking-[0.25em] text-warmBronze uppercase">Direct Connections</span>
+          <h2 class="font-serif text-2xl sm:text-3xl text-stone-100 font-normal mt-1">My Social Spaces & Channels</h2>
+        </div>
+        <p class="text-xs text-stone-500 font-sans max-w-xs sm:text-right">
+          Direct links to find, follow, and connect with me across the web.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
+
+        <!-- 1. YouTube: PocketVerse -->
+        <article class="archival-card p-6 rounded-2xl flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between text-stone-400 mb-4">
+              <span class="text-[10px] font-sans tracking-widest text-warmBronze uppercase bg-deepWalnut/70 px-2.5 py-1 rounded-md border border-warmBronze/20">
+                Videos & Creative Hub
+              </span>
+              <button class="copy-trigger text-stone-500 hover:text-warmBronze transition p-1" data-url="https://youtube.com/@pocketverse_org?si=lW9g4Xnh_1h_9ico" title="Copy YouTube Link">
+                <i class="fa-regular fa-copy text-sm"></i>
+              </button>
+            </div>
+
+            <div class="flex items-center gap-3.5 mb-3">
+              <div class="w-10 h-10 rounded-full bg-stone-900 border border-warmBronze/25 flex items-center justify-center text-warmBronze text-base">
+                <i class="fa-brands fa-youtube"></i>
+              </div>
+              <div>
+                <h3 class="font-serif text-xl text-stone-100 group-hover:text-warmBronze transition">PocketVerse YouTube</h3>
+                <p class="text-xs font-mono text-stone-400">@pocketverse_org</p>
+              </div>
+            </div>
+
+            <p class="font-sans text-xs sm:text-sm text-stone-400 leading-relaxed mt-3">
+              My main YouTube channel where I share videos, projects, and creative content for PocketVerse.
+            </p>
+          </div>
+
+          <div class="pt-6 mt-4 border-t border-stone-800/80 flex items-center justify-between">
+            <span class="text-[11px] font-sans text-stone-500">Official Channel</span>
+            <a href="https://youtube.com/@pocketverse_org?si=lW9g4Xnh_1h_9ico" target="_blank" rel="noopener noreferrer" class="text-xs font-sans tracking-wide text-warmBronze hover:underline flex items-center gap-1.5">
+              <span>Visit YouTube</span>
+              <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- 2. Discord: Community -->
+        <article class="archival-card p-6 rounded-2xl flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between text-stone-400 mb-4">
+              <span class="text-[10px] font-sans tracking-widest text-warmBronze uppercase bg-deepWalnut/70 px-2.5 py-1 rounded-md border border-warmBronze/20">
+                Community & Chat
+              </span>
+              <button class="copy-trigger text-stone-500 hover:text-warmBronze transition p-1" data-url="https://discord.gg/4CzDbhkCg" title="Copy Discord Invite">
+                <i class="fa-regular fa-copy text-sm"></i>
+              </button>
+            </div>
+
+            <div class="flex items-center gap-3.5 mb-3">
+              <div class="w-10 h-10 rounded-full bg-stone-900 border border-warmBronze/25 flex items-center justify-center text-warmBronze text-base">
+                <i class="fa-brands fa-discord"></i>
+              </div>
+              <div>
+                <h3 class="font-serif text-xl text-stone-100 group-hover:text-warmBronze transition">Discord Server</h3>
+                <p class="text-xs font-mono text-stone-400">discord.gg/4CzDbhkCg</p>
+              </div>
+            </div>
+
+            <p class="font-sans text-xs sm:text-sm text-stone-400 leading-relaxed mt-3">
+              Our official Discord community. A welcoming space to hang out, share ideas, talk about shared interests, and stay in touch.
+            </p>
+          </div>
+
+          <div class="pt-6 mt-4 border-t border-stone-800/80 flex items-center justify-between">
+            <span class="text-[11px] font-sans text-stone-500">Community Server</span>
+            <a href="https://discord.gg/4CzDbhkCg" target="_blank" rel="noopener noreferrer" class="text-xs font-sans tracking-wide text-warmBronze hover:underline flex items-center gap-1.5">
+              <span>Join Server</span>
+              <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- 3. GitHub: Code Repository -->
+        <article class="archival-card p-6 rounded-2xl flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between text-stone-400 mb-4">
+              <span class="text-[10px] font-sans tracking-widest text-warmBronze uppercase bg-deepWalnut/70 px-2.5 py-1 rounded-md border border-warmBronze/20">
+                Code & Development
+              </span>
+              <button class="copy-trigger text-stone-500 hover:text-warmBronze transition p-1" data-url="https://github.com/sidverse02" title="Copy GitHub URL">
+                <i class="fa-regular fa-copy text-sm"></i>
+              </button>
+            </div>
+
+            <div class="flex items-center gap-3.5 mb-3">
+              <div class="w-10 h-10 rounded-full bg-stone-900 border border-warmBronze/25 flex items-center justify-center text-warmBronze text-base">
+                <i class="fa-brands fa-github"></i>
+              </div>
+              <div>
+                <h3 class="font-serif text-xl text-stone-100 group-hover:text-warmBronze transition">GitHub Profile</h3>
+                <p class="text-xs font-mono text-stone-400">github.com/sidverse02</p>
+              </div>
+            </div>
+
+            <p class="font-sans text-xs sm:text-sm text-stone-400 leading-relaxed mt-3">
+              My personal GitHub profile where I host my code, side experiments, and technical projects.
+            </p>
+          </div>
+
+          <div class="pt-6 mt-4 border-t border-stone-800/80 flex items-center justify-between">
+            <span class="text-[11px] font-sans text-stone-500">Source Profile</span>
+            <a href="https://github.com/sidverse02" target="_blank" rel="noopener noreferrer" class="text-xs font-sans tracking-wide text-warmBronze hover:underline flex items-center gap-1.5">
+              <span>View GitHub</span>
+              <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- 4. Instagram: Visual Journal -->
+        <article class="archival-card p-6 rounded-2xl flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between text-stone-400 mb-4">
+              <span class="text-[10px] font-sans tracking-widest text-warmBronze uppercase bg-deepWalnut/70 px-2.5 py-1 rounded-md border border-warmBronze/20">
+                Visuals & Photos
+              </span>
+              <button class="copy-trigger text-stone-500 hover:text-warmBronze transition p-1" data-url="https://www.instagram.com/pocketverse_org?utm_source=ig_web_button_share_sheet&srtk=ZDNlZDc0MzIxNw==" title="Copy Instagram Link">
+                <i class="fa-regular fa-copy text-sm"></i>
+              </button>
+            </div>
+
+            <div class="flex items-center gap-3.5 mb-3">
+              <div class="w-10 h-10 rounded-full bg-stone-900 border border-warmBronze/25 flex items-center justify-center text-warmBronze text-base">
+                <i class="fa-brands fa-instagram"></i>
+              </div>
+              <div>
+                <h3 class="font-serif text-xl text-stone-100 group-hover:text-warmBronze transition">Instagram Page</h3>
+                <p class="text-xs font-mono text-stone-400">@pocketverse_org</p>
+              </div>
+            </div>
+
+            <p class="font-sans text-xs sm:text-sm text-stone-400 leading-relaxed mt-3">
+              The PocketVerse Instagram profile for posts, stories, announcements, and casual visual updates.
+            </p>
+          </div>
+
+          <div class="pt-6 mt-4 border-t border-stone-800/80 flex items-center justify-between">
+            <span class="text-[11px] font-sans text-stone-500">Instagram Feed</span>
+            <a href="https://www.instagram.com/pocketverse_org?utm_source=ig_web_button_share_sheet&srtk=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="text-xs font-sans tracking-wide text-warmBronze hover:underline flex items-center gap-1.5">
+              <span>View Instagram</span>
+              <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2: ABOUT THE SPACE & POCKETVERSE -->
+    <section id="about-space" class="space-y-6">
+      <div class="border-b border-warmBronze/20 pb-4">
+        <span class="text-[10px] font-sans tracking-[0.25em] text-warmBronze uppercase">About This Space</span>
+        <h2 class="font-serif text-2xl sm:text-3xl text-stone-100 font-normal mt-1">Behind SidVerse & PocketVerse</h2>
+      </div>
+
+      <div class="archival-card p-8 sm:p-10 rounded-3xl space-y-6 text-stone-300 font-sans text-sm sm:text-base leading-relaxed">
+        <p class="editorial-dropcap text-stone-300">
+          SidVerse was created as a single, accessible address on the internet where anyone can reach me, explore what I do, and easily jump into my communities. Instead of scattering links across different places, this site acts as a permanent home.
+        </p>
+
+        <p class="text-stone-400">
+          Through <span class="text-warmBronze font-serif italic text-base">PocketVerse</span>, the goal is simple: to create, connect, and build engaging content across YouTube, Instagram, and Discord. Whether you're here to watch videos, check out what I’m building on GitHub, or simply chat in our Discord server, you’re always welcome.
+        </p>
+
+        <div class="my-6 p-6 rounded-2xl bg-stone-900/60 border-l-2 border-warmBronze italic font-serif text-base sm:text-lg text-stone-200">
+          "A quiet place to gather my links, projects, and thoughts under one roof."
+        </div>
+
+        <p class="text-stone-400">
+          Feel free to bookmark this page, copy the links, or say hello using the visitor notes below.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 3: THE VISITOR GUESTBOOK LEDGER -->
+    <section id="guestbook" class="space-y-6">
+      <div class="border-b border-warmBronze/20 pb-4">
+        <span class="text-[10px] font-sans tracking-[0.25em] text-warmBronze uppercase">Sanctuary Register</span>
+        <h2 class="font-serif text-2xl sm:text-3xl text-stone-100 font-normal mt-1">Leave a Note</h2>
+      </div>
+
+      <div class="archival-card p-6 sm:p-8 rounded-3xl space-y-6">
+        <p class="text-xs sm:text-sm text-stone-400 font-sans leading-relaxed">
+          If you are visiting SidVerse, feel free to sign your name and leave a greeting. Your note will be saved right here in your browser.
+        </p>
+
+        <!-- Guestbook Input Form -->
+        <form id="ledgerForm" class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="visitorName" class="block text-xs font-sans text-stone-400 uppercase tracking-wider mb-1.5">Your Name / Handle</label>
+              <input type="text" id="visitorName" required placeholder="e.g. Fellow Visitor" class="w-full bg-stone-900/90 border border-stone-800 focus:border-warmBronze text-stone-200 px-4 py-2.5 rounded-xl text-xs font-sans outline-none transition">
+            </div>
+            <div>
+              <label for="visitorOrigin" class="block text-xs font-sans text-stone-400 uppercase tracking-wider mb-1.5">Where are you visiting from?</label>
+              <input type="text" id="visitorOrigin" placeholder="e.g. YouTube, Discord, web" class="w-full bg-stone-900/90 border border-stone-800 focus:border-warmBronze text-stone-200 px-4 py-2.5 rounded-xl text-xs font-sans outline-none transition">
+            </div>
+          </div>
+
+          <div>
+            <label for="visitorNote" class="block text-xs font-sans text-stone-400 uppercase tracking-wider mb-1.5">Your Note</label>
+            <textarea id="visitorNote" rows="3" required placeholder="Leave a greeting, message, or reflection..." class="w-full bg-stone-900/90 border border-stone-800 focus:border-warmBronze text-stone-200 px-4 py-2.5 rounded-xl text-xs font-sans outline-none transition resize-none"></textarea>
+          </div>
+
+          <button type="submit" class="px-5 py-2.5 rounded-full bg-warmBronze/15 hover:bg-warmBronze/25 border border-warmBronze/40 text-warmBronze font-sans text-xs tracking-wider uppercase transition">
+            Sign Visitor Book
+          </button>
+        </form>
+
+        <!-- Inscriptions List -->
+        <div class="pt-6 border-t border-stone-800/80">
+          <h4 class="font-serif text-sm text-stone-300 mb-3">Visitor Messages</h4>
+          <div id="ledgerEntries" class="space-y-3 max-h-60 overflow-y-auto pr-2">
+            <!-- Dynamic entries load here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Refined Editorial Footer -->
+  <footer class="w-full border-t border-warmBronze/15 bg-espresso/90 py-10 mt-16 z-20">
+    <div class="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-stone-500 font-sans text-xs">
+      
+      <div class="flex flex-col items-center md:items-start gap-1">
+        <span class="font-display tracking-[0.2em] text-stone-300 uppercase">SidVerse</span>
+        <span>A sovereign estate founded &amp; curated by Sidharth.</span>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <a href="https://youtube.com/@pocketverse_org?si=lW9g4Xnh_1h_9ico" target="_blank" rel="noopener noreferrer" class="hover:text-warmBronze transition">YouTube</a>
+        <a href="https://discord.gg/4CzDbhkCg" target="_blank" rel="noopener noreferrer" class="hover:text-warmBronze transition">Discord</a>
+        <a href="https://github.com/sidverse02" target="_blank" rel="noopener noreferrer" class="hover:text-warmBronze transition">GitHub</a>
+        <a href="https://www.instagram.com/pocketverse_org?utm_source=ig_web_button_share_sheet&srtk=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="hover:text-warmBronze transition">Instagram</a>
+      </div>
+
+      <div class="text-stone-500 text-[11px]">
+        Designed with deliberate restraint.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Subtle Notification Toast -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-16 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-deepWalnut text-stone-200 border border-warmBronze/40 px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2.5 font-sans text-xs">
+      <i class="fa-solid fa-check text-warmBronze text-xs"></i>
+      <span id="toastMsg">Link copied to clipboard</span>
+    </div>
+  </div>
+
+  <script>
+    // Copy helper
+    function copyText(val, message = "Copied to clipboard") {
+      const el = document.createElement('textarea');
+      el.value = val;
+      document.body.appendChild(el);
+      el.select();
+      try {
+        document.execCommand('copy');
+        showToast(message);
+      } catch(e) {
+        showToast("Unable to copy");
+      }
+      document.body.removeChild(el);
+    }
+
+    // Toast handler
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+    let toastTimeout;
+
+    function showToast(msg) {
+      clearTimeout(toastTimeout);
+      toastMsg.textContent = msg;
+      toast.classList.remove('translate-y-16', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-16', 'opacity-0');
+      }, 2500);
+    }
+
+    // Individual node copy triggers
+    document.querySelectorAll('.copy-trigger').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const url = btn.getAttribute('data-url');
+        copyText(url, "Destination URL copied");
+      });
+    });
+
+    // Share All Vault Links
+    const copyAllBtn = document.getElementById('copyAllBtn');
+    if (copyAllBtn) {
+      copyAllBtn.addEventListener('click', () => {
+        const textToShare = `Explore SidVerse & PocketVerse:
+• YouTube: https://youtube.com/@pocketverse_org?si=lW9g4Xnh_1h_9ico
+• Discord: https://discord.gg/4CzDbhkCg
+• GitHub: https://github.com/sidverse02
+• Instagram: https://www.instagram.com/pocketverse_org?utm_source=ig_web_button_share_sheet&srtk=ZDNlZDc0MzIxNw==`;
+        
+        if (navigator.share) {
+          navigator.share({
+            title: 'SidVerse Archival Sanctuary',
+            text: textToShare,
+            url: window.location.href
+          }).catch(() => copyText(window.location.href, "SidVerse address copied"));
+        } else {
+          copyText(window.location.href, "SidVerse address copied");
+        }
+      });
+    }
+
+    // Guestbook Ledger local storage persistence
+    const ledgerForm = document.getElementById('ledgerForm');
+    const ledgerEntries = document.getElementById('ledgerEntries');
+
+    const defaultLedger = [
+      {
+        name: "Sidharth",
+        origin: "Founder & Host",
+        note: "Welcome to SidVerse! Thanks for stopping by. Check out my links and feel free to connect on Discord.",
+        date: "CREATOR NOTE"
+      }
+    ];
+
+    function loadLedger() {
+      const stored = localStorage.getItem('sidverse_ledger');
+      const entries = stored ? JSON.parse(stored) : defaultLedger;
+      
+      ledgerEntries.innerHTML = '';
+      entries.forEach(entry => {
+        const item = document.createElement('div');
+        item.className = 'p-3.5 rounded-xl bg-stone-900/60 border border-stone-800/80 text-xs font-sans space-y-1.5';
+        item.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="font-serif text-stone-200 font-medium">${escapeHtml(entry.name)} <span class="text-stone-500 font-sans font-normal text-[11px]">(${escapeHtml(entry.origin || 'Visitor')})</span></span>
+            <span class="text-[10px] text-warmBronze font-mono">${escapeHtml(entry.date)}</span>
+          </div>
+          <p class="text-stone-400 leading-relaxed font-sans">${escapeHtml(entry.note)}</p>
+        `;
+        ledgerEntries.appendChild(item);
+      });
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    if (ledgerForm) {
+      ledgerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('visitorName').value.trim();
+        const origin = document.getElementById('visitorOrigin').value.trim();
+        const note = document.getElementById('visitorNote').value.trim();
+
+        if (!name || !note) return;
+
+        const stored = localStorage.getItem('sidverse_ledger');
+        const entries = stored ? JSON.parse(stored) : [...defaultLedger];
+
+        entries.unshift({
+          name: name,
+          origin: origin || 'Passerby',
+          note: note,
+          date: 'JUST NOW'
+        });
+
+        localStorage.setItem('sidverse_ledger', JSON.stringify(entries));
+        ledgerForm.reset();
+        loadLedger();
+        showToast("Inscription etched into ledger");
+      });
+    }
+
+    window.onload = function() {
+      loadLedger();
+    };
+  </script>
+</body>
+</html>
